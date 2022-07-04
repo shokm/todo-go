@@ -1,0 +1,80 @@
+swagger: "2.0"
+info: # infoオブジェクト
+  title: "Swaggerの例"
+  version: "1.0.0"
+host: "example.swagger.io"
+basePath: "/v1"
+schemes:
+- "http"
+paths: # pathsオブジェクト
+  /todo/{todo_id}:
+    get: # getメソッドのoperationオブジェクト
+      tags:
+      - "userAPI"
+      summary: "TodoIDによって、ユーザー情報を取得する"
+      operationId: "getTodoByTodoId"
+      produces:
+      - "application/json"
+      parameters: # parameterオブジェクトの配列
+      - name: "todo_id"
+        in: "path"
+        description: "TodoID"
+        required: true
+        type: "number"
+      responses: # responsesオブジェクト
+        200:
+          description: "成功なレスポンス"
+          schema: # schemaオブジェクト
+            $ref: "#/definitions/User" 
+            # definitionsに定義されたオブジェクトの参考
+        400:
+          description: "無効なTodoID"
+        404:
+          description: "Todoを見つけていません"
+    put: # putメソッドのoperationオブジェクト
+      tags:
+      - "userAPI"
+      summary: "TodoIDによって、ユーザー情報を更新する"
+      operationId: "updateTodoByTodoId"
+      produces:
+      - "application/json"
+      parameters: # parameterオブジェクトの配列
+      - name: "todo_id"
+        in: "path"
+        description: "TodoID"
+        required: true
+        type: "number"
+      - in: "body"
+        name: "body"
+        required: true
+        schema: # schemaオブジェクト
+          $ref: "#/definitions/UpdateUserReq" 
+          # definitionsに定義されたオベジェクの参考
+      responses: # responsesオブジェクト
+        200:
+          description: "成功なレスポンス"
+        400:
+          description: "無効なTodoID"
+        404:
+          description: "Todoを見つけていません"
+definitions: # definitionsオブジェクト
+  User: # schemaオブジェクト
+    type: "object"
+    properties:
+      id: # schemaオブジェクト
+        type: "integer"
+        format: "int64"
+      name: # schemaオブジェクト
+        type: "string"
+      todo: # schemaオブジェクト
+        type: "string"
+  UpdateUserReq: # schemaオブジェクト
+    type: "object"
+    required:
+      - "name"
+      - "todo"
+    properties:
+      name: # schemaオブジェクト
+        type: "string"
+      todo: # schemaオブジェクト
+        type: "string"
