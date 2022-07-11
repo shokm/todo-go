@@ -19,6 +19,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
+	"github.com/shokm/todo-go/backend/swagger"
 	"github.com/shokm/todo-go/backend/swagger/gen/restapi/factory/user_api"
 )
 
@@ -44,9 +45,7 @@ func NewFactoryAPI(spec *loads.Document) *FactoryAPI {
 
 		JSONProducer: runtime.JSONProducer(),
 
-		UserAPIGetTodoByTodoIDHandler: user_api.GetTodoByTodoIDHandlerFunc(func(params user_api.GetTodoByTodoIDParams) middleware.Responder {
-			return middleware.NotImplemented("operation user_api.GetTodoByTodoID has not yet been implemented")
-		}),
+		UserAPIGetTodoByTodoIDHandler: user_api.GetTodoByTodoIDHandlerFunc(swagger.GetTodo),
 		UserAPIUpdateTodoByTodoIDHandler: user_api.UpdateTodoByTodoIDHandlerFunc(func(params user_api.UpdateTodoByTodoIDParams) middleware.Responder {
 			return middleware.NotImplemented("operation user_api.UpdateTodoByTodoID has not yet been implemented")
 		}),
