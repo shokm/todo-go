@@ -22,6 +22,11 @@ func GetContentDB(pid int) (int, string) {
 	var todo Todo
 	todo.ID = uint(pid)
 	db.First(&todo)
+
+	// セッションを切る
+	sqlDB, err := db.DB()
+	sqlDB.Close()
+
 	return todo.Status, todo.Todo
 }
 

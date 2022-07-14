@@ -31,7 +31,7 @@ paths: # pathsオブジェクト
           description: "無効なTodoID"
         404:
           description: "Todoを見つけていません"
-    put: # putメソッドのoperationオブジェクト
+    post: # putメソッドのoperationオブジェクト
       tags:
       - "userAPI"
       summary: "TodoIDによって、ユーザー情報を更新する"
@@ -72,12 +72,8 @@ definitions: # definitionsオブジェクト
   UpdateUserReq: # schemaオブジェクト
     type: "object"
     required:
-      - "id"
       - "status"
     properties:
-      id: # schemaオブジェクト
-        type: "integer"
-        format: "int64"
       status: # schemaオブジェクト
         type: "number"
         format: "int64"

@@ -19,10 +19,6 @@ import (
 // swagger:model UpdateUserReq
 type UpdateUserReq struct {
 
-	// id
-	// Required: true
-	ID *int64 `json:"id"`
-
 	// status
 	// Required: true
 	Status *int64 `json:"status"`
@@ -35,10 +31,6 @@ type UpdateUserReq struct {
 func (m *UpdateUserReq) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateID(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateStatus(formats); err != nil {
 		res = append(res, err)
 	}
@@ -46,15 +38,6 @@ func (m *UpdateUserReq) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *UpdateUserReq) validateID(formats strfmt.Registry) error {
-
-	if err := validate.Required("id", "body", m.ID); err != nil {
-		return err
-	}
-
 	return nil
 }
 

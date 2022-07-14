@@ -15,6 +15,10 @@
 				todo: {{ posts[n-1].todo }}
 			</div>
 		</div>
+		<div>
+		<h3>元JSON</h3>
+		{{ posts }}
+		</div>
     </div>
 </template>
 

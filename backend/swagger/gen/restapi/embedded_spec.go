@@ -63,7 +63,7 @@ func init() {
           }
         }
       },
-      "put": {
+      "post": {
         "produces": [
           "application/json"
         ],
@@ -107,14 +107,9 @@ func init() {
     "UpdateUserReq": {
       "type": "object",
       "required": [
-        "id",
         "status"
       ],
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
         "status": {
           "type": "number",
           "format": "int64"
@@ -188,7 +183,7 @@ func init() {
           }
         }
       },
-      "put": {
+      "post": {
         "produces": [
           "application/json"
         ],
@@ -232,14 +227,9 @@ func init() {
     "UpdateUserReq": {
       "type": "object",
       "required": [
-        "id",
         "status"
       ],
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
         "status": {
           "type": "number",
           "format": "int64"
