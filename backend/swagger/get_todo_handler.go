@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func GetContentDB(pid int) (string, string) {
+func GetContentDB(pid int) (int, string) {
 	dsn := "host=localhost user=postgres password=passwd dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Shanghai"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
@@ -16,13 +16,13 @@ func GetContentDB(pid int) (string, string) {
 	}
 	type Todo struct {
 		gorm.Model
-		Name string
-		Todo string
+		Status int
+		Todo   string
 	}
 	var todo Todo
 	todo.ID = uint(pid)
 	db.First(&todo)
-	return todo.Name, todo.Todo
+	return todo.Status, todo.Todo
 }
 
 func GetTodo(p user_api.GetTodoByTodoIDParams) middleware.Responder {
@@ -32,7 +32,7 @@ func GetTodo(p user_api.GetTodoByTodoIDParams) middleware.Responder {
 		// id
 		ID: int64(pid),
 		// name
-		Name: n,
+		Status: int64(n),
 		// todo
 		Todo: t,
 	}

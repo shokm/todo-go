@@ -1,9 +1,20 @@
 <template>
     <div>
-        <div>{{ posts }}</div>
-        <div>{{ posts.id }}</div>
-        <div>{{ posts.name }}</div>
-        <div>{{ posts.todo }}</div>
+		<h3>未完了</h3>
+		<div v-for="n in range">
+			<div v-if="posts[n-1].status !== 1">
+				id: {{ posts[n-1].id }},
+				todo: {{ posts[n-1].todo }}
+			</div>
+		</div>
+
+		<h3>完了</h3>
+		<div v-for="n in range">
+			<div v-if="posts[n-1].status === 1">
+				id: {{ posts[n-1].id }},
+				todo: {{ posts[n-1].todo }}
+			</div>
+		</div>
     </div>
 </template>
 
@@ -12,14 +23,24 @@ import Vue from 'vue'
 
 export default Vue.extend({
     async asyncData({ $axios }) {
+		const resArray: any = [];
 		// 取得先のURL
-		const url = "http://localhost:4000/v1/todo/2";
-		// リクエスト（Get）
-		const response = await $axios.$get(url);
+		for ( let i=1; i<100; i++) {
+			const url = "http://localhost:4000/v1/todo/" + i;
+			// リクエスト（Get）
+			const response = await $axios.$get(url);
+			const resJSON = JSON.parse(JSON.stringify(response));
+			if (resJSON.todo === undefined) {
+				break;
+			} else {
+				resArray.push(response)
+			}
+		}
         
 		// 配列で返ってくるのでJSONにして返却
 		return {
-			posts: response
+			posts: JSON.parse(JSON.stringify(resArray)),
+			range: resArray.length
 		};
 	}
 })

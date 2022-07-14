@@ -107,12 +107,17 @@ func init() {
     "UpdateUserReq": {
       "type": "object",
       "required": [
-        "name",
-        "todo"
+        "id",
+        "status"
       ],
       "properties": {
-        "name": {
-          "type": "string"
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "number",
+          "format": "int64"
         },
         "todo": {
           "type": "string"
@@ -126,8 +131,9 @@ func init() {
           "type": "integer",
           "format": "int64"
         },
-        "name": {
-          "type": "string"
+        "status": {
+          "type": "number",
+          "format": "int64"
         },
         "todo": {
           "type": "string"
@@ -226,12 +232,17 @@ func init() {
     "UpdateUserReq": {
       "type": "object",
       "required": [
-        "name",
-        "todo"
+        "id",
+        "status"
       ],
       "properties": {
-        "name": {
-          "type": "string"
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "number",
+          "format": "int64"
         },
         "todo": {
           "type": "string"
@@ -245,8 +256,9 @@ func init() {
           "type": "integer",
           "format": "int64"
         },
-        "name": {
-          "type": "string"
+        "status": {
+          "type": "number",
+          "format": "int64"
         },
         "todo": {
           "type": "string"

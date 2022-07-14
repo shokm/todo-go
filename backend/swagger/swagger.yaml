@@ -64,17 +64,22 @@ definitions: # definitionsオブジェクト
       id: # schemaオブジェクト
         type: "integer"
         format: "int64"
-      name: # schemaオブジェクト
-        type: "string"
+      status: # schemaオブジェクト
+        type: "number"
+        format: "int64"
       todo: # schemaオブジェクト
         type: "string"
   UpdateUserReq: # schemaオブジェクト
     type: "object"
     required:
-      - "name"
-      - "todo"
+      - "id"
+      - "status"
     properties:
-      name: # schemaオブジェクト
-        type: "string"
+      id: # schemaオブジェクト
+        type: "integer"
+        format: "int64"
+      status: # schemaオブジェクト
+        type: "number"
+        format: "int64"
       todo: # schemaオブジェクト
         type: "string"

@@ -20,8 +20,8 @@ type User struct {
 	// id
 	ID int64 `json:"id,omitempty"`
 
-	// name
-	Name string `json:"name,omitempty"`
+	// status
+	Status int64 `json:"status,omitempty"`
 
 	// todo
 	Todo string `json:"todo,omitempty"`
