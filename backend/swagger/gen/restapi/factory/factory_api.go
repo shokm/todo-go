@@ -46,9 +46,7 @@ func NewFactoryAPI(spec *loads.Document) *FactoryAPI {
 		JSONProducer: runtime.JSONProducer(),
 
 		UserAPIGetTodoByTodoIDHandler: user_api.GetTodoByTodoIDHandlerFunc(swagger.GetTodo),
-		UserAPIUpdateTodoByTodoIDHandler: user_api.UpdateTodoByTodoIDHandlerFunc(func(params user_api.UpdateTodoByTodoIDParams) middleware.Responder {
-			return middleware.NotImplemented("operation user_api.UpdateTodoByTodoID has not yet been implemented")
-		}),
+		UserAPIUpdateTodoByTodoIDHandler: user_api.UpdateTodoByTodoIDHandlerFunc(swagger.UpdTodo),
 	}
 }
 
