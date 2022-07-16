@@ -6,6 +6,7 @@ import (
 	"github.com/shokm/todo-go/backend/swagger/gen/restapi/factory/user_api"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 func UpdContentDB(pid int, pBody *models.UpdateUserReq) error {
@@ -23,7 +24,11 @@ func UpdContentDB(pid int, pBody *models.UpdateUserReq) error {
 	todo.ID = uint(pid)
 	todo.Status = int(*pBody.Status)
 	todo.Todo = pBody.Todo
-	db.Create(&todo)
+
+	// すでに値が存在した場合更新
+	db.Clauses(clause.OnConflict{
+		UpdateAll: true,
+	}).Create(&todo)
 
 	// セッションを切る
 	sqlDB, err := db.DB()

@@ -13,7 +13,7 @@ type Todo struct {
 	Todo   string
 }
 
-func db() {
+func createDB() {
 	dsn := "host=localhost user=postgres password=passwd dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Shanghai"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
