@@ -19,6 +19,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
+	"github.com/shokm/todo-go/backend/swagger"
 	"github.com/shokm/todo-go/backend/swagger/gen/restapi/factory/user_api"
 )
 
@@ -44,12 +45,8 @@ func NewFactoryAPI(spec *loads.Document) *FactoryAPI {
 
 		JSONProducer: runtime.JSONProducer(),
 
-		UserAPIGetTodoByTodoIDHandler: user_api.GetTodoByTodoIDHandlerFunc(func(params user_api.GetTodoByTodoIDParams) middleware.Responder {
-			return middleware.NotImplemented("operation user_api.GetTodoByTodoID has not yet been implemented")
-		}),
-		UserAPIUpdateTodoByTodoIDHandler: user_api.UpdateTodoByTodoIDHandlerFunc(func(params user_api.UpdateTodoByTodoIDParams) middleware.Responder {
-			return middleware.NotImplemented("operation user_api.UpdateTodoByTodoID has not yet been implemented")
-		}),
+		UserAPIGetTodoByTodoIDHandler: user_api.GetTodoByTodoIDHandlerFunc(swagger.GetTodo),
+		UserAPIUpdateTodoByTodoIDHandler: user_api.UpdateTodoByTodoIDHandlerFunc(swagger.UpdTodo),
 	}
 }
 
@@ -265,10 +262,10 @@ func (o *FactoryAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/todo/{todo_id}"] = user_api.NewGetTodoByTodoID(o.context, o.UserAPIGetTodoByTodoIDHandler)
-	if o.handlers["PUT"] == nil {
-		o.handlers["PUT"] = make(map[string]http.Handler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["PUT"]["/todo/{todo_id}"] = user_api.NewUpdateTodoByTodoID(o.context, o.UserAPIUpdateTodoByTodoIDHandler)
+	o.handlers["POST"]["/todo/{todo_id}"] = user_api.NewUpdateTodoByTodoID(o.context, o.UserAPIUpdateTodoByTodoIDHandler)
 }
 
 // Serve creates a http handler to serve the API over HTTP

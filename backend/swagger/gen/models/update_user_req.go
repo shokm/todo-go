@@ -19,24 +19,19 @@ import (
 // swagger:model UpdateUserReq
 type UpdateUserReq struct {
 
-	// name
+	// status
 	// Required: true
-	Name *string `json:"name"`
+	Status *int64 `json:"status"`
 
 	// todo
-	// Required: true
-	Todo *string `json:"todo"`
+	Todo string `json:"todo,omitempty"`
 }
 
 // Validate validates this update user req
 func (m *UpdateUserReq) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateName(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateTodo(formats); err != nil {
+	if err := m.validateStatus(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -46,18 +41,9 @@ func (m *UpdateUserReq) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *UpdateUserReq) validateName(formats strfmt.Registry) error {
+func (m *UpdateUserReq) validateStatus(formats strfmt.Registry) error {
 
-	if err := validate.Required("name", "body", m.Name); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *UpdateUserReq) validateTodo(formats strfmt.Registry) error {
-
-	if err := validate.Required("todo", "body", m.Todo); err != nil {
+	if err := validate.Required("status", "body", m.Status); err != nil {
 		return err
 	}
 

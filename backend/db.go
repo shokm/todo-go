@@ -9,11 +9,11 @@ import (
 
 type Todo struct {
 	gorm.Model
-	Name string
-	Todo string
+	Status int64
+	Todo   string
 }
 
-func main() {
+func createDB() {
 	dsn := "host=localhost user=postgres password=passwd dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Shanghai"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
@@ -25,9 +25,12 @@ func main() {
 	var count int64
 	db.Model(&Todo{}).Count(&count)
 	if count == 0 {
-		db.Create(&Todo{Name: "user01", Todo: "todo01"})
-		db.Create(&Todo{Name: "user02", Todo: "todo02"})
-		db.Create(&Todo{Name: "user03", Todo: "todo03"})
+		db.Create(&Todo{Status: 0, Todo: "todo01_incomplete"})
+		db.Create(&Todo{Status: 0, Todo: "todo02_incomplete"})
+		db.Create(&Todo{Status: 1, Todo: "todo03_completed"})
+		db.Create(&Todo{Status: 0, Todo: "todo04_incomplete"})
+		db.Create(&Todo{Status: 0, Todo: "todo05_incomplete"})
+		db.Create(&Todo{Status: 1, Todo: "todo06_completed"})
 	}
 
 	var todo Todo

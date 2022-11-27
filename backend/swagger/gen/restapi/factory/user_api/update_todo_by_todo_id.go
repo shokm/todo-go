@@ -29,7 +29,7 @@ func NewUpdateTodoByTodoID(ctx *middleware.Context, handler UpdateTodoByTodoIDHa
 	return &UpdateTodoByTodoID{Context: ctx, Handler: handler}
 }
 
-/* UpdateTodoByTodoID swagger:route PUT /todo/{todo_id} userAPI updateTodoByTodoId
+/* UpdateTodoByTodoID swagger:route POST /todo/{todo_id} userAPI updateTodoByTodoId
 
 TodoIDによって、ユーザー情報を更新する
 
